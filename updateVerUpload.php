@@ -9,9 +9,9 @@ date_default_timezone_set('Etc/GMT+5');
  */
 //DB details
 $dbHost     = 'localhost';
-$dbUsername = 'csmel';
-$dbPassword = 'goaway@2014';
-$dbName     = 'creativesakasdb';
+$dbUsername = 'root';
+$dbPassword = '';
+$dbName     = 'githubDatabase';
 
 // set parameters
 $name=$_POST['name'];
