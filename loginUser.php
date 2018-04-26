@@ -5,37 +5,22 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>Creative Sakas: Resume</title>
     <meta content="Melanie Sakas" name="author">
-
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
 </head>
-
 <body>
+      <section>
 
-        <section>
-          <?php
-/*
- * Insert image data into database
- */
 
-//DB details
-$dbHost     = 'localhost';
-$dbUsername = 'root';
-$dbPassword = '';
-$dbName     = 'githubDatabase';
+<?php include 'includes/connection.php' ?>
+        <?php
 $username = $_POST['loginName'];
 $password = $_POST['loginPW'];
 
-
-
-
 //Create connection and select DB
-$connection = new PDO('mysql:host=localhost;dbname=githubDatabase', $dbUsername, $dbPassword);
-
-// Check connection
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
-} else {
+try {
+    $connection = new PDO('mysql:host=localhost;dbname=creativedb', $dbUsername, $dbPassword);
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Check connection
     $verify = $connection->prepare("SELECT userAdmin From user WHERE userAdmin =?");
 
     $verify->bindValue(':loginName', $username, PDO::PARAM_STR);
@@ -74,13 +59,11 @@ if (!$connection) {
     } else {
         echo 'OOPS- Wrong username, try again.';
     }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
-
 $connection=null;
-
 ?>
 </section>
-
 </body>
-
 </html>
