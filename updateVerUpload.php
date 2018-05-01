@@ -1,12 +1,27 @@
 <?php
-date_default_timezone_set('Etc/GMT+5');?>
+session_start();
+header("location:loginUser.php");
+exit;
+?>
+
+<?php date_default_timezone_set('Etc/GMT+5'); ?>
 <?php include 'includes/connection.php' ?>
+	<?php include 'includes/nav.php';
+
+	echo $_SESSION['loginName'];
+	echo $_SESSION['loginPW'];?>
 <?php
 // set parameters
 $name=$_POST['name'];
 $comment=$_POST['comment'];
 $dateVal= date("ymd");
-$timeVal= date("H:i");
+$timeVal= date("H+:i");
+
+
+$_SESSION['loginName'] = $_POST['loginName'];
+$_SESSION['loginPW'] = $_POST['loginPW'];
+$username = $_POST['loginName'];
+$password = $_POST['loginPW'];
 
 //Create connection and select DB
 try {
@@ -29,7 +44,7 @@ try {
                     $insert->bindParam(5, $_FILES["image"]['tmp_name'], PDO::PARAM_LOB);
                     $insert->execute(array($name, $comment, $dateVal, $timeVal,  $imgContent ));
                     if ($insert) {
-                        echo "File uploaded successfully.";
+                        echo "File uploaded successfully.<br> go back?";
                     } else {
                         echo "File upload failed, please try again.";
                     }

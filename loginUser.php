@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -6,16 +10,28 @@
     <title>Creative Sakas: Resume</title>
     <meta content="Melanie Sakas" name="author">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="css/gitProject.css" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <style>
+      .wrapper {
+        display: grid;
+        grid-template-rows: .5fr 2fr .5fr;
+        min-height: 100%;
+        grid-gap: 10px;
+        grid-column-gap: 0;
+        grid-template-areas: "nav nav" "comment section" "footer footer";
+      }</style>
 </head>
 <body>
-      <section>
-
-
+  <div class="wrapper">
+<?php include 'includes/nav.php' ?>
 <?php include 'includes/connection.php' ?>
         <?php
+        $_SESSION['loginName'] = $_POST['loginName'];
+        $_SESSION['loginPW'] = $_POST['loginPW'];
 $username = $_POST['loginName'];
 $password = $_POST['loginPW'];
-
+echo $_SESSION['loginName'];
 //Create connection and select DB
 try {
     $connection = new PDO('mysql:host=localhost;dbname=creativedb', $dbUsername, $dbPassword);
@@ -27,35 +43,7 @@ try {
     $verify->execute(array($_POST['loginName']));
 
     if ($verify->fetchColumn() == $_POST['loginName']) {
-        echo'Username was valid!<br> Hey, ' . $username;
-        echo'  <form action="updateVerUpload.php" method="post" enctype="multipart/form-data">';
-        echo'  <h1>Comments</h1>';
-        echo' <div class="row">';
-        echo'<div class="col justify-content-start">';
-        echo '<label for="name">';
-        echo 'Name';
-        echo '</label></div>';
-        echo'<div class="col"><input id="name" type="text" name="name" maxlength="13"></div>';
-        echo'  </div>';
-        echo'<div class="row">';
-        echo'<div class="col">';
-        echo'<label for="name">';
-        echo 'Review';
-        echo'</label>';
-        echo '</div>';
-        echo'<div class="col">';
-        echo '<input id="comment" type="text" name="comment" maxlength="240" size="30">';
-        echo '</div>';
-        echo'</div>';
-
-        echo'    <div class="row">';
-        echo'<div class="col"><label for="upload">Select image to upload:</label></div>';
-        echo'<div class="col"><input  type="file" id="myDropZone" name="image" value="UPLOAD"/></div>';
-        echo'    <div class="col"><input  type="submit" id="submit-all" name="submit" value="UPLOAD"/>';
-        echo'        </div>';
-        echo'    </div>';
-
-        echo'    </form>';
+include 'includes/uploadForm.php';
     } else {
         echo 'OOPS- Wrong username, try again.';
     }
@@ -64,6 +52,10 @@ try {
 }
 $connection=null;
 ?>
-</section>
+<?php include 'includes/section.php' ?>
+<footer class="footer">
+;-/
+</footer>
+</div> <!-- close wrapper -->
 </body>
 </html>
