@@ -1,27 +1,13 @@
-<?php
-session_start();
-header("location:loginUser.php");
-exit;
-?>
-
+<?php header("Location:index.php"); ?>
 <?php date_default_timezone_set('Etc/GMT+5'); ?>
 <?php include 'includes/connection.php' ?>
-	<?php include 'includes/nav.php';
-
-	echo $_SESSION['loginName'];
-	echo $_SESSION['loginPW'];?>
+	<?php include 'includes/nav.php' ?>
 <?php
 // set parameters
 $name=$_POST['name'];
 $comment=$_POST['comment'];
 $dateVal= date("ymd");
 $timeVal= date("H+:i");
-
-
-$_SESSION['loginName'] = $_POST['loginName'];
-$_SESSION['loginPW'] = $_POST['loginPW'];
-$username = $_POST['loginName'];
-$password = $_POST['loginPW'];
 
 //Create connection and select DB
 try {

@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 
@@ -16,17 +13,15 @@ session_start();
 		grid-template-rows: .5fr 2fr .5fr;
 		min-height: 100%;
 		grid-gap: 10px;
-		grid-column-gap: 0;
-		grid-template-areas: "nav nav" "login section" "footer footer";
+		grid-column-gap: 10px;
+		grid-template-areas: "nav nav" "login login" "footer footer";
 	}</style>
 </head>
 
 <body>
 	<div class="wrapper">
 <?php include 'includes/nav.php' ?>
-
 <?php include 'includes/loginForm.php' ?>
-<?php include 'includes/section.php' ?>
 <footer class="footer">
 ;-/
 </footer>

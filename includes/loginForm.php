@@ -1,9 +1,10 @@
 <div class="login">
 	 <div class="wrapper-nested">
-				<h1>Login</h1>
+
 
 			<form id="loginForm" name="loginForm" method="post" action="loginUser.php">
 <div class="input-name-nested">
+		<h1>Login</h1>
 						<label for="loginName">Name</label>
 
 						<input id="loginName" name="loginName" placeholder=" " type="text">

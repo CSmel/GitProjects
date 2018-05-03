@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -27,11 +23,9 @@ session_start();
 <?php include 'includes/nav.php' ?>
 <?php include 'includes/connection.php' ?>
         <?php
-        $_SESSION['loginName'] = $_POST['loginName'];
-        $_SESSION['loginPW'] = $_POST['loginPW'];
 $username = $_POST['loginName'];
 $password = $_POST['loginPW'];
-echo $_SESSION['loginName'];
+
 //Create connection and select DB
 try {
     $connection = new PDO('mysql:host=localhost;dbname=creativedb', $dbUsername, $dbPassword);
